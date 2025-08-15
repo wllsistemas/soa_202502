@@ -4,3 +4,6 @@ Estilo de Arquitetura REST FULL
 
 Desenvolvido na linguagem: <br>
 ![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
+
+## Aula 01 - Configuração das Rotas e Conexão com Banco de dados
+[Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_01)
