@@ -7,3 +7,6 @@ Desenvolvido na linguagem: <br>
 
 ## Aula 01 - Configuração das Rotas e Conexão com Banco de dados
 [Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_01)
+
+## Aula 02 - Testes de CRUD e construção das rotas SelectAll e SelectById
+[Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_02)
