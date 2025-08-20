@@ -11,3 +11,6 @@ Primeira aula com desenvolvimento de código usando framework.
 - Controllers devolvendo **Responses** com estrutura JSON
 - Configuração da conexão com o banco de dados no **Conexao.php**
 - Testes de conexão com o objeto **PDO**
+
+## Fluxo de uma requisição no framework
+![Fluxo Framework](FluxoFramework.png)
