@@ -14,5 +14,5 @@ Desenvolvido na linguagem: <br>
 ## Aula 02 - Testes de CRUD e construção das rotas SelectAll e SelectById
 [Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_02)
 
-## Aula 03 - Validação, Tranformação de Dados, Verificação de Duplicações
+## Aula 03 - Validação, Transformação de Dados, Verificação de Duplicações
 [Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_03)
