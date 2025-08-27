@@ -10,4 +10,4 @@ Terceira aula com validações no controller e finalização do model Cliente.
 - Adição de métodos e rotas para ativar a inativar cliente
 - Modelagem da tabela "seguimento" para relacionamento com cliente
 - Configuração das rotas para o CRUD seguimento
-- Criação do ***SeguimentoController** e respectivos métodos 
+- Criação do **SeguimentoController** e respectivos métodos 

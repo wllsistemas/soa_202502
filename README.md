@@ -16,3 +16,6 @@ Desenvolvido na linguagem: <br>
 
 ## Aula 03 - Validação, Transformação de Dados, Verificação de Duplicações
 [Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_03)
+
+## Aula 04 - Cadastro automático de Seguimento e consulta usando JOIN
+[Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_04)

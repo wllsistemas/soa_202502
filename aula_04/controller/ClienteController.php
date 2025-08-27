@@ -2,6 +2,7 @@
 require_once './core/Request.php';
 require_once './core/Response.php';
 require_once './model/ClienteModel.php';
+require_once './model/SeguimentoModel.php';
 
 class ClienteController
 {
@@ -52,6 +53,7 @@ class ClienteController
         $nome = trim($campos['nome']);
         $sexo = trim($campos['sexo']);
         $sexo = strtoupper($sexo);
+        $seguimento = trim(strtoupper($campos['seguimento']));
         $idade = trim($campos['idade']);
 
         // VALIDAÇÃO
@@ -108,13 +110,27 @@ class ClienteController
             ], 406);
         }
 
+        // VERIFICAR SE O SEGUIMENTO EXISTE
+        $seguimentoModel = new SeguimentoModel();
+        $seguimentoExistente = $seguimentoModel->selectByDescricao($seguimento);
+
+        if (empty($seguimentoExistente)) {
+            // CADASTRAR SEGUIMENTO
+            $seguimentoModel->insert(['descricao' => $seguimento]);
+            $seguimentoExistente = $seguimentoModel->selectByDescricao($seguimento);
+        }
+
+        // CAPTURAR O ID DO SEGUIMENTO
+        $seguimento_id = $seguimentoExistente->id;
+
         // INSERE NO BANCO DE DADOS
         $sucesso = $clienteModel->insert([
             'nome' => $nome,
             'sexo' => $sexo,
             'idade' => $idade,
             'excluido' => 0,
-            'status' => 'ATIVO'
+            'status' => 'ATIVO',
+            'seguimento_id' => $seguimento_id
         ]);
 
         if ($sucesso) {

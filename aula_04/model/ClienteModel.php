@@ -11,7 +11,11 @@ class ClienteModel
         try {
             $conexao = Conexao::getInstance();
 
-            $sql = 'SELECT * FROM cliente WHERE excluido = 0';
+            $sql = 'SELECT c.*, s.descricao as seguimento
+                    FROM cliente c
+                    JOIN seguimento s on s.id = c.seguimento_id
+                    WHERE excluido = 0
+                    ORDER BY id DESC';
             $stmt = $conexao->prepare($sql);
             $stmt->execute();
             $clientes = $stmt->fetchAll(PDO::FETCH_OBJ);
