@@ -3,11 +3,25 @@ require_once './core/Request.php';
 require_once './core/Response.php';
 require_once './model/ClienteModel.php';
 require_once './model/SeguimentoModel.php';
+require_once './model/UsuarioModel.php';
+
+define('CONSULTA', 'CONSULTA');
+define('CADASTRO', 'CADASTRO');
+define('EDICAO', 'EDICAO');
+define('EXCLUSAO', 'EXCLUSAO');
 
 class ClienteController
 {
     public function show(Request $request, Response $response)
     {
+        $validacao = $this->validarUsuario($request, CONSULTA);
+
+        if (!empty($validacao)) {
+            return $response->json([
+                'message' => $validacao
+            ], 401);
+        }
+
         $clienteModel = new ClienteModel();
         $registros = $clienteModel->selectAll();
 
@@ -24,6 +38,14 @@ class ClienteController
 
     public function findById(Request $request, Response $response, array $url)
     {
+        $validacao = $this->validarUsuario($request, CONSULTA);
+
+        if (!empty($validacao)) {
+            return $response->json([
+                'message' => $validacao
+            ], 401);
+        }
+
         $id = $url[0];
 
         if (!is_numeric($id)) {
@@ -48,6 +70,14 @@ class ClienteController
 
     public function add(Request $request, Response $response)
     {
+        $validacao = $this->validarUsuario($request, CADASTRO);
+
+        if (!empty($validacao)) {
+            return $response->json([
+                'message' => $validacao
+            ], 401);
+        }
+
         $campos = $request->body();
 
         $nome = trim($campos['nome']);
@@ -146,6 +176,14 @@ class ClienteController
 
     public function edit(Request $request, Response $response, array $url)
     {
+        $validacao = $this->validarUsuario($request, EDICAO);
+
+        if (!empty($validacao)) {
+            return $response->json([
+                'message' => $validacao
+            ], 401);
+        }
+
         $campos = $request->body();
 
         $id = $url[0];
@@ -175,6 +213,14 @@ class ClienteController
 
     public function delete(Request $request, Response $response, array $url)
     {
+        $validacao = $this->validarUsuario($request, EXCLUSAO);
+
+        if (!empty($validacao)) {
+            return $response->json([
+                'message' => $validacao
+            ], 401);
+        }
+
         $id = $url[0];
 
         $clienteModel = new ClienteModel();
@@ -201,6 +247,12 @@ class ClienteController
 
     public function inactive(Request $request, Response $response, array $url)
     {
+        // $dados = $request->header('Authorization');
+        // $dados = str_replace('Basic ', '', $dados);
+        // $dados = base64_decode($dados);
+        // var_dump($dados);
+        // exit;
+
         $id = $url[0];
 
         $clienteModel = new ClienteModel();
@@ -248,6 +300,42 @@ class ClienteController
             return $response->json([
                 'message' => 'Houve um erro ao ativar o cliente',
             ], 500);
+        }
+    }
+
+    public function validarUsuario(Request $request, $operacao)
+    {
+        $dados = $request->header('Authorization');
+        $dados = str_replace('Basic ', '', $dados);
+        $dados = base64_decode($dados);
+
+        list($email, $senha) = explode(':', $dados);
+
+        $usuarioModel = new UsuarioModel();
+        $usuario = $usuarioModel->selectByEmailAndPassword($email, $senha);
+
+        if (empty($usuario)) {
+            return 'Usuário não autorizado';
+        }
+
+        if ($usuario->status !== 'ATIVO') {
+            return 'Usuário inativo';
+        }
+
+        if ($operacao == CONSULTA && $usuario->consulta == 0) {
+            return 'Usuário não tem permissão para realizar consultas';
+        }
+
+        if ($operacao == CADASTRO && $usuario->cadastro == 0) {
+            return 'Usuário não tem permissão para realizar cadastros';
+        }
+
+        if ($operacao == EDICAO && $usuario->edicao == 0) {
+            return 'Usuário não tem permissão para realizar edições';
+        }
+
+        if ($operacao == EXCLUSAO && $usuario->exclusao == 0) {
+            return 'Usuário não tem permissão para realizar exclusões';
         }
     }
 }

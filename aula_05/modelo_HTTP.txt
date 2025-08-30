@@ -1,0 +1,15 @@
+// CABEÇALHO HTTP
+Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
+
+// CONTEÚDO DA CHAVE "Authorization"
+"Basic dXN1YXJpbzpwYXNzd29yZA=="
+
+// CONTEÚDO USUÁRIO E SENHA EM BASE64
+"dXN1YXJpbzpwYXNzd29yZA=="
+
+// CONTEÚDO USUÁRIO E SENHA EM BASE64 DESENCODADO
+email@teste.com.br:123456
+
+// DESSERIALIZAÇÃO EM VARIÁVEIS
+$email = "email@teste.com.br"
+$senha = "123456"

@@ -19,3 +19,6 @@ Desenvolvido na linguagem: <br>
 
 ## Aula 04 - Cadastro automático de Seguimento e consulta usando JOIN
 [Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_04)
+
+## Aula 05 - Trabalhando com Basic Authentication nos endpoints
+[Fontes](https://github.com/wllsistemas/soa_202502/tree/main/aula_05)
