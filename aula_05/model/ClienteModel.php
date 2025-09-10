@@ -54,6 +54,7 @@ class ClienteModel
             $sql = 'SELECT * FROM cliente WHERE nome = ? AND excluido = 0';
             $stmt = $conexao->prepare($sql);
             $stmt->execute([$nome]);
+
             $cliente = $stmt->fetch(PDO::FETCH_OBJ);
 
             return $cliente;
